@@ -25,7 +25,7 @@ elif category == "Corporation Law":
 elif category == "Immigration Law":
     doc_type = st.selectbox("Select document type:", ["Visa application","Greencard Application", "Naturalization"])
 elif category == "Family Law":
-      doc_type = st.selectbox("Select document type:", ["Adoption","Divorce", "Name Change"])
+    doc_type = st.selectbox("Select document type:", ["Adoption","Divorce", "Name Change"])
 elif category == "Will & Trust":
     doc_type = st.selectbox("Select document type:", ["Last Will and Testament", "Revocable Trust","Revocable Trust", "Healthcare Derivative", "Power of Attorney"])
 
@@ -45,10 +45,10 @@ with st.form("doc_form"):
 	governing_law = st.text_input("Governing Law (State or Jurisdiction)")
     elif doc_type == "Contract":
     	party_a = st.text_input("Party A")
-   	 party_b = st.text_input("Party B")
-   	 agreement_subject = st.text_area("Purpose of Contract")
-   	 effective_date = st.text_input("Effective Date")
-   	 governing_law = st.text_input("Governing Law (State or Jurisdiction)")
+   	party_b = st.text_input("Party B")
+   	agreement_subject = st.text_area("Purpose of Contract")
+	effective_date = st.text_input("Effective Date")
+   	governing_law = st.text_input("Governing Law (State or Jurisdiction)")
     elif doc_type == "Last Will and Testment":
         beneficiaries = st.text_area("List of Beneficiaries")
         executor = st.text_input("Executor's Name")
