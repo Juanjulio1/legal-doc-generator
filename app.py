@@ -4,7 +4,7 @@ from openai import OpenAI
 st.title("🧪 Test Version – Updated via GitHub")
 
 # Secure API key
-    client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 # --- Sidebar ---
 st.sidebar.title("📚 Legal Categories")
