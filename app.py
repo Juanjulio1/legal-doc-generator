@@ -65,31 +65,32 @@ if submitted:
         Client Name: {name}
         Client Address: {address}
         """
+	    
+        # Add more prompt content based on document type
+        if doc_type == "Lease Agreement":
+            prompt += f"""
+            Property Address: {property_address}
+            Lease Term: {term}
+            Monthly Rent: {rent}
+            """
+        elif doc_type == "Last Will and Testment":
+            prompt += f"""
+            Beneficiaries: {beneficiaries}
+            Executor: {executor}
+            """
 
-# Add more prompt content based on document type
-if doc_type == "Lease Agreement":
-    prompt += f"""
-    Property Address: {property_address}
-    Lease Term: {term}
-    Monthly Rent: {rent}
-    """
-elif doc_type == "Last Will and Testment":
-    prompt += f"""
-    Beneficiaries: {beneficiaries}
-    Executor: {executor}
-    """
+        # Call OpenAI API
+	    
+        response = client.chat.completions.create(
+            model="gpt4",
+            messages=[
+                {"role": "system", "content": "You are a legal assistant generating formal legal documents."},
+                {"role": "user", "content": prompt}
+            ]
+        )
 
-# Call OpenAI API
-response = client.chat.completions.create(
-    model="gpt4",
-    messages=[
-	{"role": "system", "content": "You are a legal assistant generating formal legal documents."},
-	{"role": "user", "content": prompt}
-    ]
-)
+        legal_doc = response.choices[0].message.content
 
-legal_doc = response.choices[0].message.content
-
-# Display result
-st.success("✅ Document Ready")
-st.text_area("Legal Document", value=legal_doc, height=400)
+        # Display result
+        st.success("✅ Document Ready")
+        st.text_area("Legal Document", value=legal_doc, height=400)
