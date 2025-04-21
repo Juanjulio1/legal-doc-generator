@@ -31,7 +31,7 @@ elif category == "Will & Trust":
 
 # --- User Form ---
 with st.form("doc_form"):
-st.subheader(f"Fill in the fields for: {doc_type}")
+    st.subheader(f"Fill in the fields for: {doc_type}")
 
     name = st.text_input("Client's Full Name")
     address = st.text_input("Client's Address")
