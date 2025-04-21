@@ -35,7 +35,7 @@ with st.form("doc_form"):
     address = st.text_input("Client's Address")
     submitted = st.form_submit_button("Generate Document")
 if submitted:
-    with st.spinner("Generating your legal document...")
+    with st.spinner("Generating your legal document..."):
 
 # Extra fields based on document type
 if doc_type == "Lease Agreement":
