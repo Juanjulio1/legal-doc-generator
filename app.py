@@ -61,7 +61,7 @@ if submitted:
     with st.spinner("Generating your legal document..."):
 
 # Start the prompt
-prompt = f"""
+    prompt = f"""
     Please generate a professional {doc_type} in the category of {category}.
     Client Name: {name}
     Client Address: {address}
