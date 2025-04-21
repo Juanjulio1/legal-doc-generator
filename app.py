@@ -38,7 +38,7 @@ with st.form("doc_form"):
 
     # Extra fields based on document type
     if doc_type == "Lease Agreement":
-        property_address = st.text_input("Property Address")
+	property_address = st.text_input("Property Address")
         term = st.text_input("Lease Term")
         rent = st.text_input("Monthly Rent")
 	effective_date = st.text_input("Effective Date")
