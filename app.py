@@ -60,12 +60,12 @@ elif doc_type == "Last Will and Testment":
 if submitted:
     with st.spinner("Generating your legal document..."):
 
-# Start the prompt
-    prompt = f"""
-    Please generate a professional {doc_type} in the category of {category}.
-    Client Name: {name}
-    Client Address: {address}
-"""
+        # Start the prompt
+        prompt = f"""
+        Please generate a professional {doc_type} in the category of {category}.
+        Client Name: {name}
+        Client Address: {address}
+        """
 
 # Add more prompt content based on document type
 if doc_type == "Lease Agreement":
