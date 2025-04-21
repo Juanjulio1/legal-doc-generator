@@ -58,7 +58,7 @@ elif doc_type == "Last Will and Testment":
 
 # --- Process & Generate Document ---
 if submitted:
-with st.spinner("Generating your legal document..."):
+    with st.spinner("Generating your legal document..."):
 
 # Start the prompt
     prompt = f"""
