@@ -31,10 +31,11 @@ elif category == "Will & Trust":
 
 # --- User Form ---
 with st.form("doc_form"):
-    st.subheader(f"Fill in the fields for: {doc_type}")
-
     name = st.text_input("Client's Full Name")
     address = st.text_input("Client's Address")
+    submitted = st.form_submit_button("Generate Document")
+if submitted:
+    with st.spinner("Generating your legal document...")
 
 # Extra fields based on document type
 if doc_type == "Lease Agreement":
