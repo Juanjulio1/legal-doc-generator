@@ -1,6 +1,6 @@
 
 import streamlit as st
-from openai import O
+from openai import.
 import streamlit as st
 from openai import OpenAI
 
