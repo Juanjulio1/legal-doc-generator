@@ -19,7 +19,7 @@ category = st.sidebar.radio("Choose a category:", [
     "Litigation documents"
 ])
 # --- Document Selection Based on Category ---
-if category == "Contract":
+if category == "Contract Law":
     st.header("You are requesting a tailored contract")
     st.write("Please enter the contract details below.")
 
@@ -64,13 +64,13 @@ if category == "Contract":
         st.text_area("Generated Contract", value=legal_doc, height=400)
 
 # You can expand for other categories in a similar way
-elif category == "Lease":
+elif category == "Immigration Law":
     st.header("You are requesting a tailored lease agreement")
     st.write("Please enter the lease details below.")
     # ...form fields and logic similar to above
 
-elif category == "Will":
-    st.header("You are requesting a tailored will")
+elif category == "Will & Trust":
+    st.header("You are requesting a tailored Will")
     st.write("Please enter the required details below.")
     # ...form fields and logic similar to above
 
