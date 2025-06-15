@@ -1,6 +1,7 @@
 
 import streamlit as st
 from openai import OpenAI
+st.title("Welcome to Legal AI Alpha")
 
 st.set_page_config(page_title="Legal Document Generator", page_icon="📄")
 
@@ -11,7 +12,7 @@ client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 st.sidebar.title("📚 Legal Categories")
 category = st.sidebar.radio("Choose a category:", [
     "Real Property Law",
-    "Corporation Law",
+    "Contract Law",
     "Immigration Law",
     "Family Law",
     "Will & Trust",
