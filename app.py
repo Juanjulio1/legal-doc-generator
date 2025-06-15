@@ -1,7 +1,5 @@
 
 import streamlit as st
-from openai import.
-import streamlit as st
 from openai import OpenAI
 
 st.set_page_config(page_title="Legal Document Generator", page_icon="📄")
