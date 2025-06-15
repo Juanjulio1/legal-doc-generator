@@ -1,7 +1,6 @@
 
 import streamlit as st
 from openai import OpenAI
-st.title("Welcome to Legal AI Alpha")
 
 st.set_page_config(page_title="Legal Document Generator", page_icon="📄")
 
@@ -75,4 +74,4 @@ elif category == "Will & Trust":
     # ...form fields and logic similar to above
 
 else:
-    st.header("Please select a category to begin.")
+    st.header("Welcome to Legal AI Alpha")
