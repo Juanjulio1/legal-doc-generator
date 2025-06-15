@@ -1,88 +1,62 @@
+
+
+
+st.title("Welcome to Legal AI Alpha")
+
+import streamlit as st
+from openai import O
 import streamlit as st
 from openai import OpenAI
 
-st.title("🧪 Test Version – Updated via GitHub")
+st.set_page_config(page_title="Legal Document Generator", page_icon="📄")
 
 # Secure API key
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 # --- Sidebar ---
 st.sidebar.title("📚 Legal Categories")
-category = st.sidebar.selectbox("Choose a category:", [
+category = st.sidebar.radio("Choose a category:", [
     "Real Property Law",
     "Corporation Law",
     "Immigration Law",
     "Family Law",
-    "Will & Trust"
+    "Will & Trust",
     "Litigation documents"
 ])
-
 # --- Document Selection Based on Category ---
-if category == "Real Property Law":
-    doc_type = st.selectbox("Select document type:", ["Contract of Sale-Cooperative","Contract of Sale-Condo","Residential Contract of Sale","Rider to Contract of Sale" "Deed of Sale", "Lease Agreement", "Lease Amendment"])
-elif category == "Corporation Law":
-    doc_type = st.selectbox("Select document type:", ["Operating Agreement","ByLaw", "Article","Shareholder Agreement","Resolution"])
-elif category == "Immigration Law":
-    doc_type = st.selectbox("Select document type:", ["Visa application","Greencard Application", "Naturalization"])
-elif category == "Family Law":
-    doc_type = st.selectbox("Select document type:", ["Adoption","Divorce", "Name Change"])
-elif category == "Will & Trust":
-    doc_type = st.selectbox("Select document type:", ["Last Will and Testament", "Revocable Trust","Revocable Trust", "Healthcare Derivative", "Power of Attorney"])
+if category == "Contract":
+    st.header("You are requesting a tailored contract")
+    st.write("Please enter the contract details below.")
 
-# --- User Form ---
-with st.form("doc_form"):
-    name = st.text_input("Client's Full Name")
-    address = st.text_input("Client's Address")
-    submitted = st.form_submit_button("Generate Document")
+    with st.form("contract_form"):
+        party_a = st.text_input("Name of Party A")
+        party_b = st.text_input("Name of Party B")
+        contract_price = st.text_input("Contract Price")
+        deadline = st.text_input("Deadline for Performance")
+        delivery_place = st.text_input("Delivery Place")
+        additional_provisions = st.text_area("Additional Provisions (Optional)")
+        submitted = st.form_submit_button("Generate Contract")
 
-# Extra fields based on document type
-if doc_type == "Lease Agreement":
-    property_address = st.text_input("Property Address")
-    term = st.text_input("Lease Term")
-    rent = st.text_input("Monthly Rent")
-    effective_date = st.text_input("Effective Date")
-    governing_law = st.text_input("Governing Law (State or Jurisdiction)")
-elif doc_type == "Contract":
-    party_a = st.text_input("Party A")
-    party_b = st.text_input("Party B")
-    agreement_subject = st.text_area("Purpose of Contract")
-    effective_date = st.text_input("Effective Date")
-    governing_law = st.text_input("Governing Law (State or Jurisdiction)")
-elif doc_type == "Last Will and Testment":
-    beneficiaries = st.text_area("List of Beneficiaries")
-    executor = st.text_input("Executor's Name")
-    governing_law = st.text_input("Governing Law (State or Jurisdiction)")
+    # Prepare prompt with placeholders for missing values
+    def placeholder(value, field):
+        return value if value.strip() else f"[TO BE FILLED BY CLIENT: {field}]"
 
-    submitted = st.form_submit_button("Generate Document")
-
-# --- Process & Generate Document ---
-if submitted:
-    with st.spinner("Generating your legal document..."):
-
-        # Start the prompt
+    if submitted:
+        st.info("Generating your contract document... Please wait.")
         prompt = f"""
-        Please generate a professional {doc_type} in the category of {category}.
-        Client Name: {name}
-        Client Address: {address}
+        Please draft a professional contract with the following details:
+        - Party A: {placeholder(party_a, 'Name of Party A')}
+        - Party B: {placeholder(party_b, 'Name of Party B')}
+        - Contract Price: {placeholder(contract_price, 'Contract Price')}
+        - Deadline for Performance: {placeholder(deadline, 'Deadline for Performance')}
+        - Delivery Place: {placeholder(delivery_place, 'Delivery Place')}
+        - Additional Provisions: {additional_provisions if additional_provisions.strip() else '[PARTIES MAY ADD EXTRA PROVISIONS HERE]'}
+        Please insert [TO BE FILLED BY CLIENT: ____] for any information that is not provided.
+        At the end of the contract, include a blank section titled 'Additional Provisions' for parties to handwrite or type more terms.
         """
-	    
-        # Add more prompt content based on document type
-        if doc_type == "Lease Agreement":
-            prompt += f"""
-            Property Address: {property_address}
-            Lease Term: {term}
-            Monthly Rent: {rent}
-            """
-        elif doc_type == "Last Will and Testment":
-            prompt += f"""
-            Beneficiaries: {beneficiaries}
-            Executor: {executor}
-            """
 
-        # Call OpenAI API
-	    
         response = client.chat.completions.create(
-            model="gpt4",
+            model="gpt-4",
             messages=[
                 {"role": "system", "content": "You are a legal assistant generating formal legal documents."},
                 {"role": "user", "content": prompt}
@@ -91,6 +65,19 @@ if submitted:
 
         legal_doc = response.choices[0].message.content
 
-        # Display result
-        st.success("✅ Document Ready")
-        st.text_area("Legal Document", value=legal_doc, height=400)
+        st.success("✅ Contract Ready")
+        st.text_area("Generated Contract", value=legal_doc, height=400)
+
+# You can expand for other categories in a similar way
+elif category == "Lease":
+    st.header("You are requesting a tailored lease agreement")
+    st.write("Please enter the lease details below.")
+    # ...form fields and logic similar to above
+
+elif category == "Will":
+    st.header("You are requesting a tailored will")
+    st.write("Please enter the required details below.")
+    # ...form fields and logic similar to above
+
+else:
+    st.header("Please select a category to begin.")
