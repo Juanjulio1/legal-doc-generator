@@ -1,8 +1,4 @@
 
-
-
-st.title("Welcome to Legal AI Alpha")
-
 import streamlit as st
 from openai import O
 import streamlit as st
